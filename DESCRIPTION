@@ -1,0 +1,24 @@
+Package: restr
+Type: Package
+Title: Create reStructuredText using Vignettes and R documentation.
+Description: Convert package rd files to static html pages, suitable for
+    serving on a website.
+Version: 0.1
+Author: Sahil Seth <me@sahilseth.com>
+Maintainer: Sahil Seth <me@sahilseth.com>
+License: MIT + file LICENSE
+Imports:
+    stringr,
+    testthat,
+    evaluate,
+    whisker,
+    highlight,
+    tools,
+    markdown,
+    devtools (>= 0.8),
+    digest,
+    grid
+Suggests:
+    knitr
+VignetteBuilder: knitr
+Roxygen: list(wrap = FALSE)

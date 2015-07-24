@@ -1,0 +1,95 @@
+
+## the following creates docs for flowr
+
+```{r}
+#devtools::install("~/Dropbox/public/github_restr")
+
+#mypack:::reload('restr')
+require(flowr)
+require(knitr)
+
+pkg = "~/Dropbox/public/github_flow"
+
+#undebug(staticdocs:::as.sd_package)
+pkg = staticdocs::as.sd_package(pkg = "~/Dropbox/public/github_flow/",
+	site_path = "~/Dropbox/public/github_flowrdocs/source/rd",
+	templates_path = "~/Dropbox/public/github_restr/inst/templates")
+pkg
+#debug(rtd:::to_rst)
+#debug(rtd:::to_rst.character)
+#build_site(pkg = "~/Dropbox/public/github_flow/", topics)
+topics = topics = c("setup", "to_flow",
+	"check.flow_def",
+	"queue", "job", "flow", 
+	"plot_flow", "submit_flow",
+	"get_flow_status", "kill_flow", "rerun_flow")
+tmp <- build_topics(pkg = pkg, topics = topics)
+#debug(build_vignettes)
+tmp <- build_vignettes(pkg = pkg)
+
+
+```
+
+
+
+
+
+```{r}
+if(FALSE){
+	setwd(pkg)
+	#unlink("inst/web")
+	#build_topics(pkg = pkg)
+	
+	
+	require(rtd)
+	require(stringr)
+	require(whisker)
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/render.r')
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/build.r')
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/package.r')
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/util.r')
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/to-rst.r')
+	source('/DRIVES/Dropbox2/Dropbox/public/staticdocs/R/rd.r')
+	
+	require(rtd)
+	pkg = as.sd_package(pkg = "~/Dropbox/public/github_flow",
+		site_path = "~/Dropbox/public/github_flow_pages/source/rd",
+		templates_path = "~/Dropbox/public/rtd/inst/templates")
+	#debug(rtd:::to_rst)
+	#debug(rtd:::to_rst.character)
+	#build_site(pkg = "~/Dropbox/public/github_flow/", topics)
+	topics = topics = c("queue", "job", "flow", "plot_flow", "submit_flow", "submit_job",
+		"get_flow_status", "kill_flow", "rerun_flow")
+	#debug(build_topics)
+	tmp <- build_topics(pkg = pkg, topics)
+	tmp <- build_vignettes(pkg = pkg)
+	
+	
+	
+	pkg <- as.sd_package(pkg)
+	# for each file, find name of one topic
+	index <- pkg$rd_index
+	## select fewer topics
+	if(!missing(topics)){
+		index <- subset(index, name %in% topics)
+	}
+	paths <- file.path(pkg$site_path, index$file_out)
+	# create columns for extra topic info
+	index$title <- ""
+	index$in_index <- TRUE
+	rd <- pkg$rd[[i]]
+	rst <- to_rst(rd,
+		env = new.env(parent = globalenv()),
+		topic = str_replace(basename(paths[[i]]), "\\.rst$", ""),
+		pkg = pkg)
+	rst$pagetitle <- rst$name
+	rst$package <- pkg[c("package", "version")]
+	find_template(package = pkg)
+	debug(render_page)
+	render_page(pkg, "topic", rst, paths[[i]])
+	graphics.off()
+	
+	
+}
+
+```
