@@ -7,7 +7,7 @@ extenstion to staticdocs and sits between Rd files and Sphinx website.
 
 ```R
 # install.packages("devtools")
-devtools::install_github("sahilseth/rtd")
+devtools::install_github("sahilseth/readthedocs")
 ```
 
 ### Features:
