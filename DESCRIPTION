@@ -1,4 +1,4 @@
-Package: restr
+Package: readthedocs
 Type: Package
 Title: Create reStructuredText using Vignettes and R documentation.
 Description: Convert package rd files to static html pages, suitable for
