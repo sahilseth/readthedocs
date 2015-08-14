@@ -7,6 +7,8 @@
 #'   \code{\link[whisker]{whisker.render}}
 #' @param x rd object to convert to rst
 #' @param ... other arguments passed onto to methods
+#'
+#' @import stringr
 #' @export
 to_rst <- function(x, ...) {
   UseMethod("to_rst")
@@ -451,7 +453,7 @@ parse_descriptions <- function(rd, ...) {
 # Simple tags that need minimal processing -----------------------------------
 
 #' @export
-to_rst.Rd <- function(x, ...) {
+to_rst.Rd_content <- function(x, ...) {
   tag <- tag(x)
 
   if (is.null(tag)) {

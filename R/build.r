@@ -1,8 +1,7 @@
 ## --- this file has been modified, using one from staticdocs as template
 
-# Generate all topic pages for a package.
+#' @title Generate all topic pages for a package.
 #' @importFrom staticdocs as.sd_package
-#' @import stringr
 #' @export
 build_topics <- function(pkg = ".", topics, site_path = NULL,
                          templates_path = NULL) {
@@ -32,7 +31,7 @@ build_topics <- function(pkg = ".", topics, site_path = NULL,
     message("Generating ", basename(paths[[i]]))
     rd_fl = index$file_in[i]
     rd <- pkg$rd[[rd_fl]]
-    rst <- to_rst(rd,
+    rst <- to_rst.Rd_doc(rd,
                   env = new.env(parent = globalenv()),
                   topic = str_replace(basename(paths[[i]]), "\\.rst$", ""),
                   pkg = pkg)
@@ -58,7 +57,7 @@ build_topics <- function(pkg = ".", topics, site_path = NULL,
 #' @importFrom knitr knit
 #' @importFrom devtools load_all
 #' @importFrom tools file_path_sans_ext file_ext
-#' @importFrom stringr str_c str_match
+#' @import stringr
 #' @importFrom staticdocs as.sd_package render_page
 #' @export
 build_vignettes <- function(pkg = ".",

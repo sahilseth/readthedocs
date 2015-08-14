@@ -1,20 +1,24 @@
+thispkg <- function(){
+  "readthedocs"
+}
+
 #' @importFrom devtools dev_meta
 inst_path <- function() {
-  if (is.null(dev_meta("restr"))) {
-    # restr is probably installed
-    system.file(package = "restr")
+  if (is.null(dev_meta(thispkg()))) {
+    # thispkg() is probably installed
+    system.file(package = thispkg())
   } else {
-    # restr was probably loaded with devtools
-    file.path(getNamespaceInfo("restr", "path"), "inst")
+    # thispkg() was probably loaded with devtools
+    file.path(getNamespaceInfo("thispkg()", "path"), "inst")
   }
 }
 
-# Return the restr path for a package
-# Could be in pkgdir/inst/restr/ (for non-installed source packages)
-# or in pkgdir/restr/ (for installed packages)
+# Return the thispkg() path for a package
+# Could be in pkgdir/inst/thispkg()/ (for non-installed source packages)
+# or in pkgdir/thispkg()/ (for installed packages)
 pkg_sd_path <- function(package) {
-  pathsrc <- file.path(package$path, "inst", "restr")
-  pathinst <- file.path(package$path, "restr")
+  pathsrc <- file.path(package$path, "inst", "thispkg()")
+  pathinst <- file.path(package$path, "thispkg()")
 
   if (dir.exists(pathsrc))
     pathsrc
