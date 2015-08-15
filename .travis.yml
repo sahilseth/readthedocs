@@ -8,6 +8,9 @@ warnings_are_errors: false
 # System dependencies for HTTP calling
 # http://docs.travis-ci.com/user/languages/r/
 
+r_github_packages:
+  - hadley/staticdocs
+
 # R
 #r_check_args: --timings --as-cran --no-install
 r_check_args: --no-build-vignettes --no-manual --as-cran rpack
