@@ -1,38 +1,14 @@
-# Sample .travis.yml for R projects from https://github.com/craigcitro/r-travis
+# a good example: https://github.com/OuhscBbmc/REDCapR/blob/master/.travis.yml
+language: r
+sudo: required
 
-language: c
+# Be strict when checking our package
+warnings_are_errors: false
 
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
+# System dependencies for HTTP calling
+# http://docs.travis-ci.com/user/languages/r/
 
-install:
-  - ./travis-tool.sh r_binary_install knitr
-  - ./travis-tool.sh r_binary_install rgl
-  - ./travis-tool.sh r_binary_install XML
-  - ./travis-tool.sh install_deps
+# R
+#r_check_args: --timings --as-cran --no-install
+r_check_args: --no-build-vignettes --no-manual --as-cran rpack
 
-script:
-  - ./travis-tool.sh run_tests
-  - FILE=$(ls -1t *.tar.gz | head -n 1)
-  - R CMD INSTALL "${FILE}"
-  - R -e "staticdocs::build_site()"
-
-on_failure:
-  - ./travis-tool.sh dump_logs
-
-deploy:
-  provider: s3
-  bucket: staticdocs.had.co.nz
-  access_key_id: AKIAIIQGQZ3IVAFTRQCA
-  secret_access_key:
-    secure: "FF+1cgT2cTs+nc0Jw+5rR7R7FhcYcQSWEXiEdsGisLqpXRahoxFWRmAApkf8lT//w9TH6xWcybrvghDY0a2Yo5QX9tD8BEXt8wsFz4gSYBXDFBn7piLcW8+Jc9guL8W2ABh7Y3jTaPQ2GtVPfC0qpG+H1dWwXGr5v+Uum+jqJ1w="
-  skip_cleanup: true
-  local-dir: inst/web
-  upload-dir: dev
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
