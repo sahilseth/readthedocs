@@ -8,16 +8,16 @@ Author: Sahil Seth <me@sahilseth.com>
 Maintainer: Sahil Seth <me@sahilseth.com>
 License: MIT + file LICENSE
 Imports:
+    devtools (>= 0.8),
     stringr,
     testthat,
     evaluate,
     whisker,
-    highlight,
-    tools,
-    markdown,
-    devtools (>= 0.8),
     digest,
-    grid
+    highlight,
+    knitr,
+    markdown,
+    staticdocs
 Suggests:
     knitr
 VignetteBuilder: knitr
